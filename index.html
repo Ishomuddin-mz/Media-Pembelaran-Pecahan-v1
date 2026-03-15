@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Master Pecahan Kelas 4 - Edutainment</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        :root {
+            --primary: #FF6B6B;
+            --secondary: #4ECDC4;
+            --accent: #FFE66D;
+            --dark: #2F2325;
+            --bg: #F7FFF7;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: var(--bg);
+            margin: 0; padding: 0;
+            color: var(--dark);
+        }
+
+        /* Navigasi */
+        nav {
+            background: white;
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: sticky; top: 0; z-index: 1000;
+        }
+
+        nav button {
+            border: none; padding: 12px 20px; border-radius: 50px;
+            font-family: 'Fredoka One', cursive; cursor: pointer;
+            transition: all 0.3s ease; font-size: 14px;
+        }
+
+        .btn-materi { background: var(--secondary); color: white; }
+        .btn-game { background: var(--primary); color: white; }
+        .btn-kuis { background: #6C5CE7; color: white; }
+        nav button:hover { transform: scale(1.1); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+
+        .container {
+            max-width: 900px; margin: 30px auto; background: white;
+            padding: 40px; border-radius: 40px; border: 4px solid var(--dark);
+            box-shadow: 12px 12px 0 var(--dark);
+        }
+
+        .section { display: none; animation: slideUp 0.5s ease; }
+        .active { display: block; }
+
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        h1, h2, h3 { font-family: 'Fredoka One', cursive; color: var(--primary); }
+
+        /* Gaya Materi Lebih Detail */
+        .materi-card {
+            background: #fff9e6; padding: 25px; border-radius: 25px;
+            margin-bottom: 25px; border-left: 10px solid var(--accent);
+        }
+
+        .visual-box {
+            display: flex; justify-content: space-around; align-items: center;
+            flex-wrap: wrap; gap: 20px; margin: 20px 0;
+        }
+
+        .pizza-real {
+            width: 180px; height: 180px; border-radius: 50%;
+            object-fit: cover; border: 5px solid white; box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .instruction {
+            background: #e0f7fa; padding: 15px; border-radius: 15px;
+            border: 2px solid var(--secondary); margin: 15px 0;
+        }
+
+        /* Game & Kuis */
+        .quiz-img-container { text-align: center; margin: 20px 0; }
+        .option-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .btn-opt {
+            padding: 15px; border: 2px solid #ddd; border-radius: 20px;
+            background: white; cursor: pointer; font-family: inherit;
+            font-size: 16px; transition: 0.2s;
+        }
+        .btn-opt:hover { background: var(--secondary); color: white; border-color: var(--secondary); }
+
+        .game-display {
+            display: flex; justify-content: center; gap: 40px; margin: 30px 0;
+        }
+
+        .fraction-display {
+            font-size: 40px; font-family: 'Fredoka One'; color: var(--primary);
+        }
+
+        .progress-container {
+            width: 100%; height: 15px; background: #eee; border-radius: 10px; margin-bottom: 20px;
+        }
+        .progress-bar {
+            height: 100%; background: var(--secondary); width: 0%; border-radius: 10px; transition: 0.5s;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <button class="btn-materi" onclick="showSec('materi')">📖 MATERI LENGKAP</button>
+    <button class="btn-game" onclick="showSec('game')">🎮 GAME TANTANGAN</button>
+    <button class="btn-kuis" onclick="showSec('kuis')">✏️ KUIS BERGAMBAR</button>
+</nav>
+
+<div class="container">
+    
+    <div id="materi" class="section active">
+        <h1>🍕 Mengenal Pecahan Satuan</h1>
+        
+        <div class="materi-card">
+            <h3>1. Apa itu Pecahan Pembilang Satu?</h3>
+            <p>Pecahan pembilang satu (pecahan satuan) adalah pecahan yang angka atasnya adalah <b>1</b>. Angka bawah (penyebut) menunjukkan berapa banyak potongan dalam 1 benda utuh.</p>
+            <div class="visual-box">
+                <div>
+                    <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=300" class="pizza-real">
+                    <p><b>1/2 (Setengah)</b><br>1 Pizza dibagi 2</p>
+                </div>
+                <div>
+                    <img src="https://images.unsplash.com/photo-1590947132387-155cc02f3212?w=300" class="pizza-real">
+                    <p><b>1/4 (Seperempat)</b><br>1 Pizza dibagi 4</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="materi-card" style="border-left-color: var(--primary);">
+            <h3>2. Membandingkan Pecahan</h3>
+            <div class="instruction">
+                <b>⭐ Rumus Rahasia:</b> <br>
+                Bayangkan kamu lapar. Kamu lebih pilih makan 1 potong dari 2 potongan (besar) atau 1 potong dari 10 potongan (sangat kecil)? <br><br>
+                Maka: <b>Semakin KECIL angka bawahnya, semakin BESAR nilai pecahannya!</b>
+            </div>
+            <p style="text-align: center; font-size: 1.2em;">
+                1/2 <b style="color:var(--primary)"> > </b> 1/4 <b style="color:var(--primary)"> > </b> 1/8
+            </p>
+        </div>
+
+        <div class="materi-card" style="border-left-color: var(--secondary);">
+            <h3>3. Mengurutkan Pecahan</h3>
+            <p><b>A. Dari yang Terkecil:</b> Susun angka bawah (penyebut) dari yang PALING BESAR ke yang kecil.</p>
+            <p><i>Contoh: 1/10, 1/5, 1/2</i></p>
+            <br>
+            <p><b>B. Dari yang Terbesar:</b> Susun angka bawah (penyebut) dari yang PALING KECIL ke yang besar.</p>
+            <p><i>Contoh: 1/2, 1/5, 1/10</i></p>
+        </div>
+    </div>
+
+    <div id="game" class="section">
+        <h2 style="text-align:center">🎮 Game: Siapa Lebih Kenyang?</h2>
+        <p style="text-align:center">Klik piring dengan potongan pizza yang <b>LEBIH BESAR</b>!</p>
+        <div class="game-display">
+            <div id="piring1" class="btn-opt" onclick="checkGame(0)" style="width:200px; text-align:center">
+                <div id="svg-g1"></div>
+                <div id="txt-g1" class="fraction-display">1/2</div>
+            </div>
+            <div id="piring2" class="btn-opt" onclick="checkGame(1)" style="width:200px; text-align:center">
+                <div id="svg-g2"></div>
+                <div id="txt-g2" class="fraction-display">1/5</div>
+            </div>
+        </div>
+        <h3 style="text-align:center">Skor: <span id="skor-game">0</span></h3>
+    </div>
+
+    <div id="kuis" class="section">
+        <div class="progress-container"><div id="progress-bar" class="progress-bar"></div></div>
+        <div id="quiz-area">
+            <h2 id="q-text">Pertanyaan akan muncul di sini...</h2>
+            <div class="quiz-img-container" id="q-img"></div>
+            <div class="option-grid" id="q-options"></div>
+        </div>
+        <div id="quiz-result" style="display:none; text-align:center">
+            <h1>Selesai! 🎉</h1>
+            <h2 id="final-score">Skor: 0</h2>
+            <button class="btn-materi" onclick="location.reload()">Ulangi Belajar</button>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function showSec(id) {
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        if(id === 'game') initGame();
+        if(id === 'kuis') initQuiz();
+    }
+
+    // --- GAME LOGIC ---
+    let gameScore = 0;
+    let correctPiring = 0;
+
+    function drawPizza(containerId, parts) {
+        const container = document.getElementById(containerId);
+        const color = containerId.includes('1') ? '#FF6B6B' : '#4ECDC4';
+        const sliceAngle = 360 / parts;
+        const endX = 50 + 40 * Math.cos(Math.PI * (270 + sliceAngle) / 180);
+        const endY = 50 + 40 * Math.sin(Math.PI * (270 + sliceAngle) / 180);
+        
+        container.innerHTML = `
+            <svg width="120" height="120" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="45" fill="#f0f0f0" stroke="#333" stroke-width="2"/>
+                <path d="M50,50 L50,10 A40,40 0 0,1 ${endX},${endY} Z" fill="${color}" stroke="#333" />
+            </svg>`;
+    }
+
+    function initGame() {
+        let n1 = Math.floor(Math.random() * 9) + 2;
+        let n2 = Math.floor(Math.random() * 9) + 2;
+        while(n1 === n2) n2 = Math.floor(Math.random() * 9) + 2;
+
+        document.getElementById('txt-g1').innerText = `1/${n1}`;
+        document.getElementById('txt-g2').innerText = `1/${n2}`;
+        drawPizza('svg-g1', n1);
+        drawPizza('svg-g2', n2);
+        
+        correctPiring = (n1 < n2) ? 0 : 1;
+    }
+
+    function checkGame(idx) {
+        if(idx === correctPiring) {
+            gameScore += 10;
+            Swal.fire({ title: 'Yummy!', text: 'Kamu memilih potongan lebih besar!', icon: 'success', timer: 1000, showConfirmButton: false });
+        } else {
+            Swal.fire({ title: 'Oh No!', text: 'Penyebut kecil justru potongannya lebih besar lho!', icon: 'error', timer: 1500, showConfirmButton: false });
+        }
+        document.getElementById('skor-game').innerText = gameScore;
+        initGame();
+    }
+
+    // --- QUIZ LOGIC ---
+    const questions = [
+        { q: "Berapa nilai pecahan pada gambar lingkaran di bawah?", img: 2, a: ["1/2", "1/3", "1/4", "1/5"], c: 0 },
+        { q: "Manakah yang nilainya paling BESAR?", img: 0, a: ["1/10", "1/5", "1/2", "1/8"], c: 2 },
+        { q: "Perhatikan gambar. Tanda yang tepat adalah...", img: "comp", a: [">", "<", "=", "Semua Salah"], c: 0 }, // 1/3 vs 1/6
+        { q: "Urutkan dari yang TERKECIL: 1/2, 1/9, 1/5", img: 0, a: ["1/2, 1/5, 1/9", "1/9, 1/5, 1/2", "1/5, 1/2, 1/9", "1/9, 1/2, 1/5"], c: 1 },
+        { q: "Satu buah pizza dipotong 8. Setiap anak mengambil 1 potong. Nilainya adalah...", img: 8, a: ["1/2", "1/4", "1/8", "1/6"], c: 2 },
+        { q: "Pecahan 1/10 dibaca...", img: 0, a: ["Satu sepuluh", "Sepuluh per satu", "Satu per sepuluh", "Semua salah"], c: 2 },
+        { q: "Manakah gambar yang menunjukkan pecahan 1/4?", img: "choose4", a: ["Gambar A", "Gambar B", "Gambar C", "Gambar D"], c: 0 },
+        { q: "Semakin besar penyebut (angka bawah), maka nilai pecahan satuan semakin...", img: 0, a: ["Besar", "Kecil", "Sama saja", "Tetap"], c: 1 },
+        { q: "Tanda yang tepat untuk 1/5 ... 1/3 adalah...", img: 0, a: [">", "<", "=", "Sama"], c: 1 },
+        { q: "Urutan dari yang TERBESAR: 1/7, 1/3, 1/5", img: 0, a: ["1/3, 1/5, 1/7", "1/7, 1/5, 1/3", "1/5, 1/3, 1/7", "Semua Benar"], c: 0 }
+    ];
+
+    let curQ = 0;
+    let quizScore = 0;
+
+    function initQuiz() {
+        curQ = 0; quizScore = 0;
+        document.getElementById('quiz-area').style.display = 'block';
+        document.getElementById('quiz-result').style.display = 'none';
+        loadQuestion();
+    }
+
+    function loadQuestion() {
+        const q = questions[curQ];
+        document.getElementById('q-text').innerText = q.q;
+        const imgDiv = document.getElementById('q-img');
+        imgDiv.innerHTML = '';
+        
+        // Render visual based on question
+        if(typeof q.img === 'number' && q.img > 0) {
+            imgDiv.innerHTML = createCircleSVG(q.img);
+        } else if (q.img === "comp") {
+            imgDiv.innerHTML = createCircleSVG(3) + " ... " + createCircleSVG(6);
+        } else if (q.img === "choose4") {
+            imgDiv.innerHTML = createCircleSVG(4);
+        }
+
+        const optDiv = document.getElementById('q-options');
+        optDiv.innerHTML = '';
+        q.a.forEach((opt, i) => {
+            const btn = document.createElement('button');
+            btn.className = 'btn-opt';
+            btn.innerText = opt;
+            btn.onclick = () => checkQuiz(i);
+            optDiv.appendChild(btn);
+        });
+
+        document.getElementById('progress-bar').style.width = ((curQ/questions.length)*100) + "%";
+    }
+
+    function createCircleSVG(parts) {
+        const slice = 360/parts;
+        const x = 50 + 40 * Math.cos(Math.PI * (270 + slice) / 180);
+        const y = 50 + 40 * Math.sin(Math.PI * (270 + slice) / 180);
+        return `<svg width="100" height="100" viewBox="0 0 100 100" style="display:inline-block">
+                    <circle cx="50" cy="50" r="40" fill="#eee" stroke="#333" />
+                    <path d="M50,50 L50,10 A40,40 0 0,1 ${x},${y} Z" fill="#FF6B6B" stroke="#333" />
+                </svg>`;
+    }
+
+    function checkQuiz(idx) {
+        if(idx === questions[curQ].c) {
+            quizScore += 10;
+        }
+        curQ++;
+        if(curQ < questions.length) loadQuestion();
+        else {
+            document.getElementById('quiz-area').style.display = 'none';
+            document.getElementById('quiz-result').style.display = 'block';
+            document.getElementById('final-score').innerText = "Skor: " + quizScore;
+            document.getElementById('progress-bar').style.width = "100%";
+        }
+    }
+</script>
+
+</body>
+                  </html>
